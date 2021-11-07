@@ -1,11 +1,12 @@
 Projeto referente ao curso "Mergulho Spring REST" da Algaworks.
 
-A Api ser· criada utilizando Spring boot e Spring MVC.
+A Api ser√° criada utilizando Spring boot e Spring MVC.
 
-A persistÍncia de dados ser· implementa com com Jakarta Persistence, Spring Data JPA e Flyway. AlÈm disso temos validaÁ„o com Bean Validation e tratamento de exceptions.
+A persist√™ncia de dados ser√° implementa com com Jakarta Persistence, Spring Data JPA e Flyway. Al√©m disso temos valida√ß√£o com Bean Validation e tratamento de exceptions.
 
-Tudo isso com boas pr·ticas para facilitar a manutenÁ„o da sua API e evitar alguns problemas no futuro.
+Tudo isso com boas pr√°ticas para facilitar a manuten√ß√£o da sua API e evitar alguns problemas no futuro.
 
-Diagrama de classes da aplicaÁ„o: 
+Diagrama de classes da aplica√ß√£o: 
  
 
+![image](https://user-images.githubusercontent.com/58311661/140631184-a99cfbbd-26d2-46f2-8456-3e62fb7234e2.png)
