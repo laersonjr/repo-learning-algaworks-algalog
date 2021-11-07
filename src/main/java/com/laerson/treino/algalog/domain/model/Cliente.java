@@ -1,5 +1,9 @@
 package com.laerson.treino.algalog.domain.model;
 
+/*
+ *Model da entidade Cliente 
+ */
+
 public class Cliente {
 	
 	private Long id;
