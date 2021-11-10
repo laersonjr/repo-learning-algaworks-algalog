@@ -1,15 +1,34 @@
 package com.laerson.treino.algalog.domain.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /*
  *Model da entidade Cliente 
  */
 
+@Entity
 public class Cliente {
 	
+	/*
+	 * O Id será gerado com a estratégia nativa do banco de dados, auto increment.
+	 * */
+	@Id
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String nome;
 	private String email;
+	
+	/*
+	 * Mapeando a variavel telefone com a coluna fone no banco de dados.
+	 * */
+	@Column(name = "fone")
 	private String telefone;
+	
 	public Long getId() {
 		return id;
 	}
