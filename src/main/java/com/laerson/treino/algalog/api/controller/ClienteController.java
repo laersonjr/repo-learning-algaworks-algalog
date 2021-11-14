@@ -1,33 +1,49 @@
 package com.laerson.treino.algalog.api.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.laerson.treino.algalog.domain.model.Cliente;
+import com.laerson.treino.algalog.domain.repository.ClienteRepository;
 
 @RequestMapping("/clientes")
 @RestController
 public class ClienteController {
 	
-	@GetMapping
-	public List<Cliente> listar() {
-		Cliente cliente1 = new Cliente();
-		cliente1.setId(1L);
-		cliente1.setNome("Laerson");
-		cliente1.setEmail("laerson@email.com");
-		cliente1.setTelefone("meu telefone");
-		
-		Cliente cliente2 = new Cliente();
-		cliente2.setId(2L);
-		cliente2.setNome("CastroS");
-		cliente2.setEmail("castro@email.com");
-		cliente2.setTelefone("meu telefone");
-		
-		return Arrays.asList(cliente1,cliente2);
+	/*
+	 * Interface do Jarkata Persistence que é usada para fazer operações nas entidades de consulta, exclusão, edição.
+	 * Para ele ficar disponível é necessário injetalo através da anotação PersistenceContext
+	 * */
+	@PersistenceContext
+	private EntityManager maneger;
+	
+	/*
+	 * Consulta realizada através do JPQL, retornando uma lista de clientes
+	 * */
+	
+	@GetMapping(value = "/teste")
+	public List<Cliente> listarClientes() {
+		return maneger.createQuery("from Cliente", Cliente.class).getResultList();
 	}
+	
+	/*
+	 * Criando uma instancia de clienteRepository
+	 * */	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	public List<Cliente> listar() {
+		return clienteRepository.findAll();
+	}
+	
+
+	
 
 }
