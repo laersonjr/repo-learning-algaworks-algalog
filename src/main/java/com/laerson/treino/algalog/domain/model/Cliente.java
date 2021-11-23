@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 // Model da entidade Cliente 
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
 public class Cliente {
 
 	// O Id será gerado com a estratégia nativa do banco de dados, auto increment.
+	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

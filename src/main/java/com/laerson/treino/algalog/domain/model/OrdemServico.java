@@ -10,6 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 // Model da entidade OrdemServico
 @Entity
@@ -20,19 +26,28 @@ public class OrdemServico {
 	private Long id;
 	
 	//Muitas ordens de serviço possue um cliente, cada os pode ter apenas um cliente.
-	//Não se fez necessário o JoinColumn, por padrão ele vai ser cliente_id
+	//Não se fez necessário o JoinColumn, por padrão ele vai ser cliente_id. Faz uma validação com cliente
+	@Valid
+	@NotNull
 	@ManyToOne
 	private Cliente cliente;
 	
+	@NotBlank
 	private String descricao;
+	@NotNull
 	private BigDecimal preco;
 	
 	//Será salvo em forma de texto em vez de número
+	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private StatusOrdemServico status;
 	
+	// Variaveis com status de apenas leitura, não podendo ser atribuida no json
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime dataAbertura;
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime dataFinalizacao;
+	
 	public Long getId() {
 		return id;
 	}
