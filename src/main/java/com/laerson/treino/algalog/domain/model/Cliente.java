@@ -10,12 +10,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.laerson.treino.algalog.domain.ValidationGroups;
+
 // Model da entidade Cliente 
 @Entity
 public class Cliente {
 
 	// O Id será gerado com a estratégia nativa do banco de dados, auto increment.
-	@NotNull
+	@NotNull(groups = ValidationGroups.ClienteId.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
