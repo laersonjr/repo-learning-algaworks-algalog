@@ -1,7 +1,7 @@
 package com.laerson.treino.algalog.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -52,10 +52,11 @@ public class OrdemServico {
 
 	// Variaveis com status de apenas leitura, não podendo ser atribuida no json
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime dataAbertura;
+	private OffsetDateTime dataAbertura;
 	
+	// OffsetDateTime utiliza ISO 8601 com offset urc
 	@JsonProperty(access = Access.READ_ONLY)
-	private LocalDateTime dataFinalizacao;
+	private OffsetDateTime dataFinalizacao;
 
 	public Long getId() {
 		return id;
@@ -97,19 +98,19 @@ public class OrdemServico {
 		this.status = status;
 	}
 
-	public LocalDateTime getDataAbertura() {
+	public OffsetDateTime getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(LocalDateTime dataAbertura) {
+	public void setDataAbertura(OffsetDateTime dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public LocalDateTime getDataFinalizacao() {
+	public OffsetDateTime getDataFinalizacao() {
 		return dataFinalizacao;
 	}
 
-	public void setDataFinalizacao(LocalDateTime dataFinalizacao) {
+	public void setDataFinalizacao(OffsetDateTime dataFinalizacao) {
 		this.dataFinalizacao = dataFinalizacao;
 	}
 
