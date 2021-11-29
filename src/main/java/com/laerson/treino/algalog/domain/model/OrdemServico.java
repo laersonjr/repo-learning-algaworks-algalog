@@ -2,6 +2,8 @@ package com.laerson.treino.algalog.domain.model;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -57,6 +60,10 @@ public class OrdemServico {
 	// OffsetDateTime utiliza ISO 8601 com offset urc
 	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime dataFinalizacao;
+	
+	// Uma ordem de serviço pode ter varios comentários
+	@OneToMany(mappedBy = "ordemServico")
+	private List<Comentario> comentarios = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -112,6 +119,14 @@ public class OrdemServico {
 
 	public void setDataFinalizacao(OffsetDateTime dataFinalizacao) {
 		this.dataFinalizacao = dataFinalizacao;
+	}
+
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
 	}
 
 	@Override
