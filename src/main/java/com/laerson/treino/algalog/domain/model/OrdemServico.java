@@ -22,6 +22,7 @@ import javax.validation.groups.Default;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.laerson.treino.algalog.domain.ValidationGroups;
+import com.laerson.treino.algalog.domain.exception.NegocioException;
 
 // Entity, Model da entidade OrdemServico
 @Entity
@@ -152,6 +153,25 @@ public class OrdemServico {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	public boolean podeSerFinalizada() {
+		return StatusOrdemServico.ABERTA.equals(getStatus());
+	}
+	
+	public boolean naoPodeSerFinalizada() {
+		return !podeSerFinalizada();
+	}
+
+	public void finalizar() {
+		
+		if (naoPodeSerFinalizada()) {
+			throw new NegocioException("Ordem de serviço não pode ser finalizada.");
+		}
+		
+		setStatus(StatusOrdemServico.FINALIZADA);
+		setDataFinalizacao(OffsetDateTime.now());
+		
 	}
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.laerson.treino.algalog.domain.exception.EntidadeNaoEncontradaException;
 import com.laerson.treino.algalog.domain.exception.NegocioException;
 
 // Anotação que trata as exceções de todos os controladores
@@ -28,6 +29,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	// massages.properties
 	@Autowired
 	private MessageSource messageSource;
+	
+	// Refatorar esse código depois, está se repetindo com NegocioException
+	@ExceptionHandler(EntidadeNaoEncontradaException.class)
+	public ResponseEntity<Object> handleEntidadeNaoEncontrada(NegocioException ex, WebRequest request) {
+		var status = HttpStatus.NOT_FOUND;
+		
+		var problema = new Problema();
+		problema.setStatus(status.value());
+		problema.setTitulo(ex.getMessage());
+		problema.setDataHora(OffsetDateTime.now());
+		
+		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+	}
+
 	
 	// Caso determina exceção for lançada, vai ser tratada nesse metodo
 	@ExceptionHandler(NegocioException.class)
